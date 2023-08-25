@@ -15,7 +15,7 @@ public class Main {
             arreglo.push(element);
         }
 
-        System.out.print(arreglo.size());
+        System.out.print(arreglo.isEmpyt());
 
     }
 

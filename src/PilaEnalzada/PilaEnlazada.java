@@ -4,7 +4,7 @@ import Pila.Stack;
 import java.util.EmptyStackException;
 
 public class PilaEnlazada<E> implements Stack<E> {
-    protected  Nodo<E>head;
+    private Nodo<E>head;
     private int tamanio;
 
     public PilaEnlazada() {

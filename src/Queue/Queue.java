@@ -45,6 +45,7 @@ public class Queue<E> implements  StackQueue<E>{
             cantidad--;
         }
 
+
         return aux;
     }
 

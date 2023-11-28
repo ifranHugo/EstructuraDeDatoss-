@@ -113,8 +113,10 @@ public class ListaSimplementeEnlazada<E> implements PositionList<E> {
         return aux;
     }
     @Override
-    public E set(Position p, E e) throws NullPointerException {
-        return null;
+    public E set(Position<E> p, E e) throws NullPointerException {
+        Nodo<E>n=checkPosition(p);
+        n.setElement(e);
+        return n.getElement();
     }
 
     static int hallarMaximo(PositionList<Integer>lista){

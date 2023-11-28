@@ -24,10 +24,11 @@ public interface PositionList<E> extends java.lang.Iterable<E>{
     public void addLast(E e)throws NullPointerException;
 
     public E remove(Position<E>p) throws NullPointerException;
-    public E set(Position p,E e)throws NullPointerException;
+    public E set(Position<E> p, E e)throws NullPointerException;
 
     @Override
     public Iterator<E> iterator();
+
 
     public Iterable<Position<E>>positions();
 }

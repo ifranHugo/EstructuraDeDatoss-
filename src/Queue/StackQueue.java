@@ -12,9 +12,4 @@ public interface StackQueue<E> {
     public boolean isEmpty();
 
     public int size();
-
-
-
-
-
 }

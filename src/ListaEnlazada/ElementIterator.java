@@ -11,7 +11,6 @@ public class ElementIterator<E> implements Iterator<E> {
         list=l;
         if (list.isEmpty())cursor=null;
         else cursor=list.first();
-
     }
 
     public boolean hasNext(){return cursor!=null;};

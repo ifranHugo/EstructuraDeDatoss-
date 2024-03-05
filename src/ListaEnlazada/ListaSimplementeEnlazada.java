@@ -17,8 +17,6 @@ public class ListaSimplementeEnlazada<E> implements PositionList<E> {
     public boolean isEmpty() {
         return cabeza==null;
     }
-
-
     @Override
     public void addFirst(E e) throws NullPointerException {
         cabeza = new Nodo<E>(e,cabeza);
@@ -29,10 +27,10 @@ public class ListaSimplementeEnlazada<E> implements PositionList<E> {
     public void addLast(E e) {
         if(isEmpty()) addFirst(e);
         else{
-            Nodo<E>p=cabeza;
-            while (p.getSiguiente()!=null)
-                p=p.getSiguiente();
-            p.setSiguiente(new Nodo<E>(e));
+            Nodo<E>cursor=cabeza;
+            while (cursor.getSiguiente()!=null)
+                cursor=cursor.getSiguiente();
+            cursor.setSiguiente(new Nodo<E>(e));
             tamanio++;
         }
     }
@@ -48,36 +46,36 @@ public class ListaSimplementeEnlazada<E> implements PositionList<E> {
     @Override
     public Position<E> last() throws EmptyStackException {
         if (cabeza==null) throw new NullPointerException("first(): esta vacia");
-        Nodo<E> p =cabeza;
-        while (p.getSiguiente()!=null){
-            p=p.getSiguiente();
+        Nodo<E> cursor=cabeza;
+        while (cursor.getSiguiente()!=null){
+            cursor=cursor.getSiguiente();
         }
-        return p;
+        return cursor;
     }
 
     @Override
     public Position<E> next(Position<E> p) throws NullPointerException {
-        Nodo<E>n =checkPosition(p);
-        if(n.getSiguiente()==null)
+        Nodo<E>aux =checkPosition(p);
+        if(aux.getSiguiente()==null)
             throw new IndexOutOfBoundsException("Next::Siguiente de ultimo");
-        return n.getSiguiente();
+        return aux.getSiguiente();
 
     }
 
-    private Nodo<E>checkPosition(Position<E> p)throws NullPointerException{
+    private Nodo<E>checkPosition(Position<E> position)throws NullPointerException{
         try {
-            if (p==null)throw new NullPointerException("Position null");
-            if(p.element()==null)throw new NullPointerException("p eliminada previamente");
-            return (Nodo<E>) p;
+            if (position==null)throw new NullPointerException("Position null");
+            if(position.element()==null)throw new NullPointerException("p eliminada previamente");
+            return (Nodo<E>) position;
         }catch (ClassCastException e){
             throw new NullPointerException("p no es un nodo de la lista");
         }
     }
 
     @Override
-    public void addAfter(Position<E> p, E e) throws NullPointerException {
-        Nodo<E>n =checkPosition(p);
-        Nodo<E>nuevo =new Nodo<>(e);
+    public void addAfter(Position<E> position, E element) throws NullPointerException {
+        Nodo<E>n =checkPosition(position);
+        Nodo<E>nuevo =new Nodo<>(element);
         nuevo.setSiguiente(n.getSiguiente());
         n.setSiguiente(nuevo);
         tamanio++;

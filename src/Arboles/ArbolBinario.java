@@ -97,4 +97,79 @@ public class ArbolBinario {
                 anterior.hijoDerecho=auxiliar;
         }
     }
+
+
+
+    public void eliminarDelArbol (int numeroAEliminar){
+        if (!arbolVacio()){
+            Nodo nodoActual = raiz;
+            Nodo nodoAnterior = raiz;
+            boolean elementoFueEncontrado  = false;
+            if (nodoActual.dato == numeroAEliminar) elementoFueEncontrado =true;
+            while ( nodoActual != null && !elementoFueEncontrado){
+
+                if (nodoActual.dato < numeroAEliminar){
+                    nodoAnterior = nodoActual;
+                    nodoActual = nodoActual.hijoDerecho;
+                }else {
+                    nodoAnterior = nodoActual;
+                    nodoActual = nodoActual.hijoIzquierdo;
+                }
+                if (nodoActual.dato == numeroAEliminar) elementoFueEncontrado =true;
+            }
+            if (elementoFueEncontrado){
+                if (nodoActual.hijoDerecho==null && nodoActual.hijoIzquierdo ==null){
+                    if (nodoActual == nodoAnterior) raiz = null;
+                    else {
+                        if (nodoAnterior.hijoIzquierdo == nodoActual) nodoAnterior.hijoIzquierdo = null;
+                        else nodoAnterior.hijoDerecho = nodoActual.hijoDerecho;
+                    }
+                }else if (nodoAnterior.hijoDerecho !=null && nodoAnterior.hijoIzquierdo ==null){
+
+                    if (nodoActual == nodoAnterior)
+                        raiz =nodoActual.hijoDerecho;
+                    else nodoAnterior.hijoDerecho = nodoActual.hijoDerecho;
+                }else if (nodoAnterior.hijoIzquierdo !=null && nodoAnterior.hijoDerecho ==null){
+                    System.out.println("Hola");
+                    if (nodoActual == nodoAnterior)
+                        raiz =nodoActual.hijoIzquierdo;
+                    else nodoAnterior.hijoIzquierdo = nodoActual.hijoIzquierdo;
+                }else if (nodoActual.hijoDerecho !=null && nodoActual.hijoIzquierdo != null){
+
+                    Nodo origen = nodoActual;
+                    nodoAnterior= nodoActual;
+                    nodoActual = nodoActual.hijoIzquierdo;
+                    if (nodoActual.hijoDerecho==null){
+                        nodoAnterior.dato =nodoActual.dato;
+                        nodoAnterior.hijoIzquierdo = nodoActual.hijoIzquierdo;
+                    }else {
+                        while (nodoActual.hijoDerecho!=null){
+                            nodoAnterior = nodoActual;
+                            nodoActual = nodoActual.hijoDerecho;
+                        }
+                        if (nodoActual.hijoIzquierdo!=null){
+                            origen.dato = nodoActual.dato;
+                            nodoAnterior.hijoDerecho=nodoActual.hijoIzquierdo;
+                        }
+                        else {
+
+                            Nodo auxiliar = nodoActual;
+                            Nodo auxiliarAnterior = nodoAnterior;
+                            while (auxiliar.hijoDerecho != null) {
+                                auxiliarAnterior = auxiliar;
+                                auxiliar = auxiliar.hijoDerecho;
+                            }
+                            auxiliar.hijoDerecho = nodoActual.hijoDerecho;
+                            auxiliar.hijoIzquierdo = nodoActual.hijoIzquierdo;
+                            auxiliarAnterior.hijoDerecho = null;
+                            nodoAnterior.hijoIzquierdo = auxiliar;
+                            System.out.println("hola" + nodoAnterior.hijoDerecho.dato);
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
 }
